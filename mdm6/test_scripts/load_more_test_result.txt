@@ -1,0 +1,90 @@
+(mdmNode@RichardGreenMacBookPro.local)1> '================== START SCRIPT ================='
+(mdmNode@RichardGreenMacBookPro.local)2> 'mnesia:start()'
+(mdmNode@RichardGreenMacBookPro.local)3> ok
+(mdmNode@RichardGreenMacBookPro.local)4> 'gen_server:start({global, assets}, assets, [], [{debug,[trace]}] )'
+(mdmNode@RichardGreenMacBookPro.local)5> /Users/admin/Documents/workspace/mdm6/src/assets.erl:87: Create = {aborted,{already_exists,object}}
+{ok,<0.78.0>}
+(mdmNode@RichardGreenMacBookPro.local)6> 'gen_server:start({global, services}, services, [], [{debug,[trace]}] )'
+(mdmNode@RichardGreenMacBookPro.local)7> /Users/admin/Documents/workspace/mdm6/src/services.erl:70: Create = {aborted,{already_exists,service_series}}
+{ok,<0.93.0>}
+(mdmNode@RichardGreenMacBookPro.local)8> 'gen_server:start({global, transformers}, transformers, [], [{debug,[trace]}] )'
+(mdmNode@RichardGreenMacBookPro.local)9> /Users/admin/Documents/workspace/mdm6/src/transformers.erl:70: Create = {aborted,{already_exists,transformer_series}}
+{ok,<0.98.0>}
+(mdmNode@RichardGreenMacBookPro.local)10> 'gen_server:start({global, circuits}, circuits, [], [{debug,[trace]}] )'
+(mdmNode@RichardGreenMacBookPro.local)11> /Users/admin/Documents/workspace/mdm6/src/circuits.erl:67: Create = {aborted,{already_exists,circuit_series}}
+{ok,<0.103.0>}
+(mdmNode@RichardGreenMacBookPro.local)12> 'mnesia:info()'
+(mdmNode@RichardGreenMacBookPro.local)13> ---> Processes holding locks <--- 
+---> Processes waiting for locks <--- 
+---> Participant transactions <--- 
+---> Coordinator transactions <---
+---> Uncertain transactions <--- 
+---> Active tables <--- 
+object         : with 222120   records occupying 99686661 bytes on disc
+service_series : with 29000    records occupying 1086132276 bytes on disc                          <<< RESTARTED THE LOAD TEST WITH 29,000 SERVICES
+circuit_series : with 29       records occupying 1181116  bytes on disc
+transformer_series: with 2900     records occupying 110085708 bytes on disc
+schema         : with 5        records occupying 885      words of mem
+===> System info in version "4.4.14", debug level = none <===
+opt_disc. Directory "/Users/admin/Documents/workspace/mdm6/Mnesia.mdmNode@RichardGreenMacBookPro.local" is used.
+use fallback at restart = false
+running db nodes   = ['mdmNode@RichardGreenMacBookPro.local']
+stopped db nodes   = [] 
+master node tables = []
+remote             = []
+ram_copies         = []
+disc_copies        = [schema]
+disc_only_copies   = [circuit_series,object,service_series,transformer_series]
+[{'mdmNode@RichardGreenMacBookPro.local',disc_copies}] = [schema]
+[{'mdmNode@RichardGreenMacBookPro.local',disc_only_copies}] = [transformer_series,
+                                                               circuit_series,
+                                                               service_series,
+                                                               object]
+2 transactions committed, 4 aborted, 0 restarted, 0 logged to disc
+0 held locks, 0 in queue; 0 local transactions, 0 remote
+0 transactions waits for other nodes: []
+ok
+(mdmNode@RichardGreenMacBookPro.local)14> 'global:registered_names()'
+(mdmNode@RichardGreenMacBookPro.local)15> [assets,services,circuits,transformers]
+(mdmNode@RichardGreenMacBookPro.local)16> 'simulator:simulate_read_and_install( {2011,05,30}, {2011,06,30} )'
+(mdmNode@RichardGreenMacBookPro.local)17> 
+Simulate day: {2011,5,30} 30000 meters start: {1311,203079,188245}  stop: {1311,203137,933165} ==> 510.6824556063741 meters per second 
+Simulate day: {2011,5,31} 31000 meters start: {1311,203322,196482}  stop: {1311,203388,131009} ==> 470.1633788925186 meters per second    <<<< 30,000 METERS PROCESSED IN 3322-3079 = 243 SECONDS ==> 8 SECONDS / THOUSAND
+Simulate day: {2011,6,1} 32000 meters start: {1311,203792,65911}  stop: {1311,203901,27014} ==> 293.6827832956133 meters per second 
+Simulate day: {2011,6,2} 33000 meters start: {1311,204498,322810}  stop: {1311,204608,177421} ==> 300.39704022983614 meters per second 
+Simulate day: {2011,6,3} 34000 meters start: {1311,205287,463684}  stop: {1311,205380,619938} ==> 364.97817956484164 meters per second 
+Simulate day: {2011,6,4} 35000 meters start: {1311,205851,907584}  stop: {1311,205943,747505} ==> 381.0978887928268 meters per second 
+Simulate day: {2011,6,5} 36000 meters start: {1311,206238,96783}  stop: {1311,206326,864148} ==> 405.55445123328826 meters per second 
+Simulate day: {2011,6,6} 37000 meters start: {1311,206619,606303}  stop: {1311,206694,649904} ==> 493.04670227645397 meters per second 
+Simulate day: {2011,6,7} 38000 meters start: {1311,207034,46082}  stop: {1311,207109,801624} ==> 501.6134661144659 meters per second 
+Simulate day: {2011,6,8} 39000 meters start: {1311,207591,625595}  stop: {1311,207676,575257} ==> 459.0954111153497 meters per second 
+
+Simulate day: {2011,6,9} 40000 meters start: {1311,208000,766445}  stop: {1311,208082,592865} ==> 488.83966816585644 meters per second    
+Simulate day: {2011,6,10} 41000 meters start: {1311,208406,6433}  stop: {1311,208492,337325} ==> 474.9169046000358 meters per second     <<< 40,000 METERS PROCESSED IN 8406-8000 = 406 SECONDS ==> 10 SECONDS / THOUSAND
+Simulate day: {2011,6,11} 42000 meters start: {1311,208841,586085}  stop: {1311,208925,620286} ==> 499.7965054728134 meters per second 
+Simulate day: {2011,6,12} 43000 meters start: {1311,209270,773344}  stop: {1311,209360,831987} ==> 477.46666580352536 meters per second 
+
+=ERROR REPORT==== 20-Jul-2011::20:59:50 ===
+Mnesia('mdmNode@RichardGreenMacBookPro.local'): ** WARNING ** Mnesia is overloaded: {dump_log,
+                                                                                     time_threshold}
+
+Simulate day: {2011,6,13} 44000 meters start: {1311,213237,742196}  stop: {1311,213324,112633} ==> 509.4335692662989 meters per second 
+Simulate day: {2011,6,14} 45000 meters start: {1311,213665,744865}  stop: {1311,213761,549404} ==> 469.7063465855203 meters per second 
+Simulate day: {2011,6,15} 46000 meters start: {1311,214331,916101}  stop: {1311,214430,196601} ==> 468.04808685344494 meters per second 
+Simulate day: {2011,6,16} 47000 meters start: {1311,214942,822450}  stop: {1311,215035,796592} ==> 505.5168995267523 meters per second 
+Simulate day: {2011,6,17} 48000 meters start: {1311,215442,359714}  stop: {1311,215541,938435} ==> 482.0306940877459 meters per second 
+Simulate day: {2011,6,18} 49000 meters start: {1311,216231,797902}  stop: {1311,216324,939414} ==> 526.0812171483752 meters per second 
+
+=ERROR REPORT==== 20-Jul-2011::22:52:20 ===
+Mnesia('mdmNode@RichardGreenMacBookPro.local'): ** WARNING ** Mnesia is overloaded: {dump_log,
+                                                                                     write_threshold}
+Simulate day: {2011,6,19} 50000 meters start: {1311,216743,105692}  stop: {1311,216839,638113} ==> 517.9606963343434 meters per second 
+Simulate day: {2011,6,20} 51000 meters start: {1311,217267,518962}  stop: {1311,217371,620516} ==> 489.90623137095537 meters per second    <<< 50,000 METERS PROCESSED IN 7267-6743 = 504 SECONDS ==> 10 SECONDS / THOUSAND
+Simulate day: {2011,6,21} 52000 meters start: {1311,243239,773194}  stop: {1311,243420,145926} ==> 288.29191321446524 meters per second 
+Simulate day: {2011,6,22} 53000 meters start: {1311,244316,803348}  stop: {1311,244459,428299} ==> 371.60398393405933 meters per second 
+Simulate day: {2011,6,23} 54000 meters start: {1311,245082,289360}  stop: {1311,245243,146964} ==> 335.70063619746566 meters per second 
+
+=ERROR REPORT==== 21-Jul-2011::06:55:41 ===
+Mnesia('mdmNode@RichardGreenMacBookPro.local'): ** WARNING ** Mnesia is overloaded: {dump_log,
+                                                                                     time_threshold}
+

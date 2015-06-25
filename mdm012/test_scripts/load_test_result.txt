@@ -1,0 +1,144 @@
+RichardGreenMacBookPro:mdm012 admin$ ls -lah
+total 16808
+drwxr-xr-x   9 admin  staff   306B Jul  9 17:25 .
+drwxr-xr-x  46 admin  staff   1.5K Jun 27 12:49 ..
+-rw-r--r--   1 admin  staff   484B Jun 27 12:49 .project
+drwxr-xr-x   3 admin  staff   102B Jun 27 12:49 .settings
+drwxr-xr-x  11 admin  staff   374B Jul  9 09:06 ebin
+drwxr-xr-x   3 admin  staff   102B Jul  9 08:34 include
+-rw-r--r--   1 admin  staff   8.2M Jul  9 17:22 meters.table
+drwxr-xr-x  10 admin  staff   340B Jul  9 09:06 src
+drwxr-xr-x   7 admin  staff   238B Jul  9 17:24 test_scripts
+RichardGreenMacBookPro:mdm012 admin$ erl -pa ebin < ./test_scripts/load_test.script
+Eshell V5.8  (abort with ^G)
+1> '% ------------------------- START SCRIPT --------------------'
+2> 'actors:init_world()'
+3> world
+4> 'meters:initialize_table()'
+5> /Users/admin/Documents/workspace/mdm012/src/channels.erl:44: FileOpenResult = {ok,channels}
+{ok,channels}
+6> 'actors:test()'
+7> /Users/admin/Documents/workspace/mdm012/src/messenger.erl:42: { test , ActorRecord , Notice } = {test,
+                                      {test,{actor_type,[1,3]},data},
+                                      {dummy,"This is only a test"}}
+  All 6 tests passed.
+ok
+8> 'node:test()'
+9> /Users/admin/Documents/workspace/mdm012/src/node.erl:176: >>>> setup_meter_table_test
+/Users/admin/Documents/workspace/mdm012/src/channels.erl:44: FileOpenResult = {ok,channels}
+/Users/admin/Documents/workspace/mdm012/src/node.erl:178: Result = {ok,channels}
+/Users/admin/Documents/workspace/mdm012/src/node.erl:223: >>>> expand_1_test
+/Users/admin/Documents/workspace/mdm012/src/node.erl:230: >>>> expand_2_test
+/Users/admin/Documents/workspace/mdm012/src/node.erl:237: >>>> expand_station_test
+/Users/admin/Documents/workspace/mdm012/src/node.erl:244: >>>> expand_circuit_test
+/Users/admin/Documents/workspace/mdm012/src/node.erl:251: >>>> expand_transformer_test
+/Users/admin/Documents/workspace/mdm012/src/node.erl:258: >>>> expand_service_test
+/Users/admin/Documents/workspace/mdm012/src/node.erl:265: >>>> expand_meter_test
+/Users/admin/Documents/workspace/mdm012/src/node.erl:272: >>>> expand_channel_test
+/Users/admin/Documents/workspace/mdm012/src/node.erl:292: >>>> cascade_expand_2_levels_test
+/Users/admin/Documents/workspace/mdm012/src/node.erl:299: >>>> cascade_expand_3_levels_test
+/Users/admin/Documents/workspace/mdm012/src/node.erl:306: >>>> cascade_expand_4_levels_test
+/Users/admin/Documents/workspace/mdm012/src/node.erl:315: >>>> tick_test
+/Users/admin/Documents/workspace/mdm012/src/node.erl:323: >>>> tick_cascade_test
+/Users/admin/Documents/workspace/mdm012/src/node.erl:334: >>>> price_cascade_test
+  All 20 tests passed.
+ok
+10> 'node:tick_load_test( 10 )  10 stations ==> 1,000,000 services'
+11> /Users/admin/Documents/workspace/mdm012/src/node.erl:344: { tick_load_test , Fanout , stations } = {tick_load_test,10,stations}
+/Users/admin/Documents/workspace/mdm012/src/meters.erl:49: "Clearing meters and channels tables." = "Clearing meters and channels tables."
+/Users/admin/Documents/workspace/mdm012/src/channels.erl:44: FileOpenResult = {ok,channels}
+/Users/admin/Documents/workspace/mdm012/src/node.erl:349: cascade expand: : 45.915 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:350: cascade tick  1: : 36.894 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:351: cascade tick  2: : 32.640 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:352: cascade tick  3: : 31.691 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:353: cascade tick  4: : 31.755 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:354: cascade tick  5: : 31.870 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:355: cascade tick  6: : 31.690 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:356: cascade tick  7: : 31.845 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:357: cascade tick  8: : 33.817 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:358: cascade tick  9: : 32.338 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:359: cascade tick 10: : 31.746 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:360: cascade tick 11: : 31.803 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:361: cascade tick 12: : 31.679 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:362: cascade tick 13: : 31.786 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:363: cascade tick 14: : 33.370 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:364: cascade tick 15: : 31.854 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:365: cascade tick 16: : 31.529 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:366: cascade tick 17: : 31.956 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:367: cascade tick 18: : 31.483 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:368: cascade tick 19: : 31.590 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:369: cascade tick 20: : 31.747 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:370: cascade tick 21: : 31.837 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:371: cascade tick 22: : 31.728 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:372: cascade tick 23: : 33.149 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:373: cascade tick 24: : 31.747 s
+/Users/admin/Documents/workspace/mdm012/src/node.erl:375: price day's usage: 12.823 s
+
+[{name,channels},
+ {file,"channels.LOG"},
+ {type,wrap},
+ {format,internal},
+ {size,{1073741824,32}},
+ {items,24000003},
+ {owners,[{<0.30.0>,false}]},
+ {users,0},
+ {head,none},
+ {mode,read_write},
+ {status,ok},
+ {node,nonode@nohost},
+ {distributed,local},
+ {no_current_bytes,505649369},
+ {no_current_items,7683754},
+ {no_items,24000003},
+ {no_written_items,24000003},
+ {current_file,2},
+ {no_overflows,{1,1}}]
+/Users/admin/Documents/workspace/mdm012/src/channels.erl:94: FileOpenForReadResult = {ok,channels}
+/Users/admin/Documents/workspace/mdm012/src/channels.erl:164: FileOpenResult = {ok,priced_usage}
+/Users/admin/Documents/workspace/mdm012/src/node.erl:379: market_price intervals: 76.644 s
+ok
+12> 'ets:info( world )'
+13> [{memory,216308966},
+ {owner,<0.30.0>},
+ {heir,none},
+ {name,world},
+ {size,3101011},
+ {node,nonode@nohost},
+ {named_table,true},
+ {type,set},
+ {keypos,1},
+ {protection,public}]
+14> 'ets:info( meters )'
+15> [{memory,32144977},
+ {owner,<0.30.0>},
+ {heir,none},
+ {name,meters},
+ {size,1000000},
+ {node,nonode@nohost},
+ {named_table,true},
+ {type,set},
+ {keypos,1},
+ {protection,public}]
+16> '% ------------------------- END SCRIPT --------------------'
+17> *** Terminating erlang (nonode@nohost)
+RichardGreenMacBookPro:mdm012 admin$ ls -lah
+total 3481976
+drwxr-xr-x  16 admin  staff   544B Jul  9 17:39 .
+drwxr-xr-x  46 admin  staff   1.5K Jun 27 12:49 ..
+-rw-r--r--   1 admin  staff   484B Jun 27 12:49 .project
+drwxr-xr-x   3 admin  staff   102B Jun 27 12:49 .settings
+-rw-r--r--   1 admin  staff   1.0G Jul  9 17:34 channels.LOG.1
+-rw-r--r--   1 admin  staff   482M Jul  9 17:39 channels.LOG.2
+-rw-r--r--   1 admin  staff    26B Jul  9 17:39 channels.LOG.idx
+-rw-r--r--   1 admin  staff    13B Jul  9 17:25 channels.LOG.siz
+drwxr-xr-x  11 admin  staff   374B Jul  9 09:06 ebin
+drwxr-xr-x   3 admin  staff   102B Jul  9 08:34 include
+-rw-r--r--   1 admin  staff    82M Jul  9 17:39 meters.table
+-rw-r--r--   1 admin  staff   112M Jul  9 17:40 priced_usage.LOG.1
+-rw-r--r--   1 admin  staff    18B Jul  9 17:39 priced_usage.LOG.idx
+-rw-r--r--   1 admin  staff    13B Jul  9 17:39 priced_usage.LOG.siz
+drwxr-xr-x  10 admin  staff   340B Jul  9 09:06 src
+drwxr-xr-x   7 admin  staff   238B Jul  9 17:24 test_scripts
+RichardGreenMacBookPro:mdm012 admin$ 
+RichardGreenMacBookPro:mdm012 admin$ 
+RichardGreenMacBookPro:mdm012 admin$ 

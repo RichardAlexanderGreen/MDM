@@ -1,0 +1,18 @@
+'%------------------------ START SCRIPT ------------------------------'.
+
+'actors:init_world()'.
+ actors:init_world().
+
+'meters:initialize_table()'.
+ meters:initialize_table().
+
+'node:test()'.
+ node:test().
+
+'meters:close()'.
+ meters:close().
+
+'channels:test()'.
+ channels:test().
+
+'%------------------------ END SCRIPT ------------------------------'.

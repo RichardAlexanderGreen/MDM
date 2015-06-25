@@ -1,0 +1,57 @@
+---
+Role: Meter
+Given: 
+. Energy usage-to-date is accumulating in usage register R.
+. Meter M is monitoring service S.
+. Service S knows that it is on transformer T.
+. Transformer T knows that it is on circuit C.
+When: 
+. Timer signals end-of-interval.
+Then:  (following code is real time)
+. U2 = usage-to-date (from R).
+. U1 = prior-usage-to-date.
+. Interval usage = U2-U1.
+. prior-usage-to-date = U2. (stored in meter's state)
+. Service [S]: Meter M on service S detects usage U for interval I. [notice]
+----
+Role: Service [Actor S].
+Action: Meter M on service S detects usage U for interval I.
+. Insert usage U into service history at interval I.   [I:U]
+. If usage at interval I exceeds reporting-threshold:
+. . System-Monitor: Service S meter M detects excessive load L at interval I. [notice]
+. Transformer [T]: Meter M on service S detects usage U for interval I. [notice]
+---
+Role: Transformer [Actor T].
+Action: Meter M on service S detects usage U for interval I.
+. Add usage U into transformer load at interval I.     [I:U+U]
+. If summed-usage at interval I exceeds reporting-threshold:
+. . System-Monitor: Transformer T detects excessive load L at interval I.  [notice]
+. Circuit [C]: Meter M on service S on transformer T detects usage U for interval I.  [notice]
+---
+Role: Circuit [Actor C].
+Action: Meter M on service S on transformer T detects usage U for interval I.
+. Add usage U into circuit load at interval I.         [I:U+U]
+. Insert usage U into service S history at interval I. [S,I:U] (mirror)
+. If summed-usage at interval I exceeds reporting-threshold:
+. . System-Monitor: Circuit C detects excessive load L at interval I. [notice]
+. System Monitor: Meter M on service S on transformer T, circuit C detects usage U for interval I. [notice]
+---
+Role: System Monitor [Actor SM].
+Action: Service S meter M detects excessive load L at interval I.
+. Sink S detects excessive load L at interval I.
+Action: Transformer T detects excessive load L at interval I.
+. Sink T detects excessive load L at interval I.
+Action: Circuit C detects excessive load L at interval I.
+. Sink C detects excessive load L at interval I.
+Action: Sink S detects excessive load L at interval I.
+. Ring-a-ding-ding.
+---
+Simulator spawns N circuits. (event handlers)
+Each circuit spawns M services. (event handlers)
+Simulator fires reset event.
+. Circuits respond to reset by clearing load history tables.
+. Services respond to reset by clearing load history tables and reseting random load factors.
+Simulator fires interval timer events:
+. Services forward timer event to its meter.
+. Then the flow above is triggered.
+---

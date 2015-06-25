@@ -1,0 +1,15 @@
+'================ START OF TEST ==================='.
+'gen_server:start({global, assets}, assets, [], [{debug,[trace]}] )'.
+ gen_server:start({global, assets}, assets, [], [] ).
+
+'global:registered_names()'.
+ global:registered_names().
+
+'assets:test()'.
+ assets:test().
+
+'q()'.
+ q().
+
+
+'================ END OF TEST ==================='.

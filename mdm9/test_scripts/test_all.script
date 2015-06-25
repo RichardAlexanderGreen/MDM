@@ -1,0 +1,22 @@
+'% ======================== Start Script ========================'.
+
+'load_history:test()'.
+ load_history:test().
+
+'load_profile:test()'.
+ load_profile:test().
+
+'usage_logger:test()'.
+ usage_logger:test().
+
+'service:test()'.
+ service:test().
+
+'transformer:test()'.
+ transformer:test().
+
+'circuit:test()'.
+ circuit:test().
+
+
+'% ======================== End Script ========================'.

@@ -1,0 +1,110 @@
+RichardGreenMacBookPro:mdm013 admin$ erl -pa ebin -name MDMnode < ./test_scripts/100k_test.script
+Eshell V5.8  (abort with ^G)
+(MDMnode@RichardGreenMacBookPro.local)1> '% ------------------------- START SCRIPT --------------------'
+(MDMnode@RichardGreenMacBookPro.local)2> 'actors:init_world()'
+(MDMnode@RichardGreenMacBookPro.local)3> world
+(MDMnode@RichardGreenMacBookPro.local)4> 'meters:initialize_table()'
+(MDMnode@RichardGreenMacBookPro.local)5> /Users/admin/Documents/workspace/mdm013/src/channels.erl:51: FileOpenResult = {ok,channels}
+{ok,channels}
+(MDMnode@RichardGreenMacBookPro.local)6> 'actors:test()'
+(MDMnode@RichardGreenMacBookPro.local)7> /Users/admin/Documents/workspace/mdm013/src/messenger.erl:42: { test , ActorRecord , Notice } = {test,
+                                      {test,{actor_type,[1,3]},data},
+                                      {dummy,"This is only a test"}}
+  All 6 tests passed.
+ok
+(MDMnode@RichardGreenMacBookPro.local)8> 'node:test()'
+(MDMnode@RichardGreenMacBookPro.local)9> /Users/admin/Documents/workspace/mdm013/src/node.erl:191: >>>> setup_meter_table_test
+/Users/admin/Documents/workspace/mdm013/src/channels.erl:51: FileOpenResult = {ok,channels}
+/Users/admin/Documents/workspace/mdm013/src/node.erl:193: Result = {ok,channels}
+/Users/admin/Documents/workspace/mdm013/src/node.erl:238: >>>> expand_1_test
+/Users/admin/Documents/workspace/mdm013/src/node.erl:245: >>>> expand_2_test
+/Users/admin/Documents/workspace/mdm013/src/node.erl:252: >>>> expand_station_test
+/Users/admin/Documents/workspace/mdm013/src/node.erl:259: >>>> expand_circuit_test
+/Users/admin/Documents/workspace/mdm013/src/node.erl:266: >>>> expand_transformer_test
+/Users/admin/Documents/workspace/mdm013/src/node.erl:273: >>>> expand_service_test
+/Users/admin/Documents/workspace/mdm013/src/node.erl:280: >>>> expand_meter_test
+/Users/admin/Documents/workspace/mdm013/src/node.erl:287: >>>> expand_channel_test
+/Users/admin/Documents/workspace/mdm013/src/node.erl:307: >>>> cascade_expand_2_levels_test
+/Users/admin/Documents/workspace/mdm013/src/node.erl:314: >>>> cascade_expand_3_levels_test
+/Users/admin/Documents/workspace/mdm013/src/node.erl:321: >>>> cascade_expand_4_levels_test
+/Users/admin/Documents/workspace/mdm013/src/node.erl:330: >>>> tick_test
+/Users/admin/Documents/workspace/mdm013/src/node.erl:338: >>>> tick_cascade_test
+/Users/admin/Documents/workspace/mdm013/src/node.erl:349: >>>> price_cascade_test
+  All 20 tests passed.
+ok
+(MDMnode@RichardGreenMacBookPro.local)10> 'node:tick_load_test( 1 )  1 station ==> 100,000 services'
+(MDMnode@RichardGreenMacBookPro.local)11> /Users/admin/Documents/workspace/mdm013/src/node.erl:359: { tick_load_test , Fanout , stations } = {tick_load_test,1,stations}
+/Users/admin/Documents/workspace/mdm013/src/meters.erl:60: "Clearing meters and channels tables." = "Clearing meters and channels tables."
+/Users/admin/Documents/workspace/mdm013/src/channels.erl:51: FileOpenResult = {ok,channels}
+/Users/admin/Documents/workspace/mdm013/src/node.erl:364: cascade expand: : 3.582 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:365: cascade tick  1: : 3.183 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:366: cascade tick  2: : 3.178 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:367: cascade tick  3: : 3.181 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:368: cascade tick  4: : 4.277 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:369: cascade tick  5: : 3.185 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:370: cascade tick  6: : 3.253 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:371: cascade tick  7: : 3.238 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:372: cascade tick  8: : 3.249 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:373: cascade tick  9: : 3.245 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:374: cascade tick 10: : 3.180 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:375: cascade tick 11: : 3.244 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:376: cascade tick 12: : 3.247 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:377: cascade tick 13: : 3.243 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:378: cascade tick 14: : 3.270 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:379: cascade tick 15: : 3.228 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:380: cascade tick 16: : 3.276 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:381: cascade tick 17: : 3.179 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:382: cascade tick 18: : 3.276 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:383: cascade tick 19: : 3.247 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:384: cascade tick 20: : 3.235 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:385: cascade tick 21: : 3.247 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:386: cascade tick 22: : 3.181 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:387: cascade tick 23: : 3.330 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:388: cascade tick 24: : 3.250 s
+/Users/admin/Documents/workspace/mdm013/src/node.erl:391: price day's usage: 1.292 s
+
+[{name,channels},
+ {file,"channels.LOG"},
+ {type,wrap},
+ {format,internal},
+ {size,{1073741824,32}},
+ {items,26400006},
+ {owners,[{<0.36.0>,false}]},
+ {users,0},
+ {head,none},
+ {mode,read_write},
+ {status,ok},
+ {node,'MDMnode@RichardGreenMacBookPro.local'},
+ {distributed,local},
+ {no_current_bytes,663588598},
+ {no_current_items,10083759},
+ {no_items,26400006},
+ {no_written_items,2400003},
+ {current_file,2},
+ {no_overflows,{0,0}}]
+/Users/admin/Documents/workspace/mdm013/src/channels.erl:89: { "pricing intervals for cycle:" , Cycle } = {"pricing intervals for cycle:",
+                                              19}
+/Users/admin/Documents/workspace/mdm013/src/channels.erl:109: FileOpenForReadResult = {ok,channels}
+
+=INFO REPORT==== 13-Oct-2011::07:13:12 ===
+disk_log: repairing "priced_usage.LOG.1" ...
+
+
+/Users/admin/Documents/workspace/mdm013/src/channels.erl:203: FileOpenResult = {repaired,priced_usage,{recovered,3599885},{badbytes,0}}
+** exception exit: {error,"trouble opening priced usage log:",
+                          {repaired,priced_usage,
+                                    {recovered,3599885},
+                                    {badbytes,0}}}
+     in function  channels:open_price_log/0
+     in call from channels:market_price/2
+     in call from node:'-tick_load_test/1-fun-27-'/0
+     in call from node:tick_load_test/1
+(MDMnode@RichardGreenMacBookPro.local)12> 'ets:info( world )'
+(MDMnode@RichardGreenMacBookPro.local)13> undefined
+(MDMnode@RichardGreenMacBookPro.local)14> 'ets:info( meters )'
+(MDMnode@RichardGreenMacBookPro.local)15> undefined
+(MDMnode@RichardGreenMacBookPro.local)16> '% ------------------------- END SCRIPT --------------------'
+(MDMnode@RichardGreenMacBookPro.local)17> *** Terminating erlang ('MDMnode@RichardGreenMacBookPro.local')
+RichardGreenMacBookPro:mdm013 admin$ 
+RichardGreenMacBookPro:mdm013 admin$ 
+RichardGreenMacBookPro:mdm013 admin$ 

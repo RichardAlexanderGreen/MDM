@@ -1,0 +1,17 @@
+' ===========================  START OF SCRIPT ====================== '.
+
+'application:start( messenger )'.
+ application:start( messenger ).
+
+'messenger_test:is_running_test()'.
+ messenger_test:is_running_test().
+
+'messenger_test:test()'.
+ messenger_test:test().
+
+'application:stop( messenger )'.
+ application:stop( messenger ).
+
+' ============================== END OF SCRIPT ===================== '.
+
+

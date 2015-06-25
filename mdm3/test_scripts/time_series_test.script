@@ -1,0 +1,6 @@
+'================== START SCRIPT ================='.
+
+'time_series:test()'.
+ time_series:test().
+
+'================== END SCRIPT ================='.

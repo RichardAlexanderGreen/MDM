@@ -1,0 +1,30 @@
+'% ------------------------- START SCRIPT --------------------'.
+
+'actors:init_world()'.
+ actors:init_world().
+
+'meters:initialize_table()'.
+ meters:initialize_table().
+
+
+'ets:info(world)'.
+ ets:info(world).
+
+'node:test()'.
+ node:test().
+
+'ets:info( world )'.
+ ets:info( world ).
+
+'ets:info( meters )'.
+ ets:info( meters ).
+
+'ets:info( channels )'.
+ ets:info( channels ).
+
+'meters:close()'.
+ meters:close().
+
+
+'% ------------------------- END SCRIPT --------------------'.
+

@@ -1,0 +1,48 @@
+' ================================= START OF SCRIPT ==================================='.
+
+'% The messenger and quad applications must be running on other nodes'.
+ % The messenger and quad applications must be running on other nodes.
+
+
+'net_adm:ping( messengerNode@RichardGreenMacBookPro.local )'.
+ net_adm:ping( messengerNode@RichardGreenMacBookPro.local ).
+
+'net_adm:ping( quadNode@RichardGreenMacBookPro.local )'.
+ net_adm:ping( quadNode@RichardGreenMacBookPro.local ). 
+
+'timer:sleep( 4000 )'.
+ timer:sleep( 4000 ).
+
+'global:registered_names()'.
+ global:registered_names().
+
+'messenger:is_running()'.
+ messenger:is_running().
+
+'application:start( mdm2 )'.
+ application:start( mdm2 ).
+
+'% Install ____ meters per day for _ days'.
+ % Install ____ meters per day for _ days.
+'sim_install:load_test( 1000, 100 )'.
+ sim_install:load_test( 1000, 100 ).
+
+
+'timer:sleep( 4000 )'.
+ timer:sleep( 4000 ).
+
+
+'application:stop( mdm2 )'.
+ application:stop( mdm2 ).
+
+'global:registered_names()'.
+ global:registered_names().
+
+'quad:quad()'.
+ quad:quad().
+
+'quad:quad() ! flush'.
+ quad:quad() ! flush.
+
+
+' ================================= END OF SCRIPT ==================================='.

@@ -1,0 +1,34 @@
+'================ START OF TEST ==================='.
+'gen_server:start({global, assets}, assets, [], [{debug,[trace]}] )'.
+ gen_server:start({global, assets}, assets, [], [] ).
+
+'global:registered_names()'.
+ global:registered_names().
+
+'assets ! hello'.
+ assets ! hello.
+
+'{global, assets} ! hello'.
+ {global, assets} ! hello.
+
+
+'object_factory:assets()'.
+ object_factory:assets().
+
+'object_factory:assets() ! hello'.
+ object_factory:assets() ! hello.
+
+'object_factory:test()'.
+ object_factory:test().
+
+'lists:sort( ets:tab2list( assets ) )'.
+%lists:sort( ets:tab2list( assets ) ).
+
+'ets:tab2file( assets, "assets_table" )'.
+ ets:tab2file( assets, "assets_table" ).
+
+'q()'.
+ q().
+
+
+'================ END OF TEST ==================='.

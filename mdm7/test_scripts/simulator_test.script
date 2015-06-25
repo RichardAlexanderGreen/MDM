@@ -1,0 +1,12 @@
+'%------------------------- START SCRIPT ----------------------'.
+
+'event_mgr:start_supervised()'.
+ event_mgr:start_supervised().
+
+'simulatorV02:test()'.
+ simulatorV02:test().
+
+'event_mgr:stop()'.
+ event_mgr:stop().
+
+'%------------------------- END SCRIPT ----------------------'.

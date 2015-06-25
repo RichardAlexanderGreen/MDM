@@ -1,0 +1,198 @@
+% Copyright Richard Alexander Green 2011
+% Description: messenger assures delivery of all published notices to subscribers.
+% Strategy:
+% - One messenger is a gen_event event manager.
+% - Each messenger_subscriber is a gen_event event handler.
+% - Each subscriber is represented by a subscriber_proxy.
+% - Each subscriber_proxy passes notices for its assigned topic on to the subscriber.
+% - To enable replay, one subscriber writes all notices to a log file.
+% ---------------------------------------------------------------------------------------
+
+-module(messenger).
+%-behavior( gen_server ).
+
+
+% ---------------------------------------------------------------------------------------
+%% Include files
+% ---------------------------------------------------------------------------------------
+
+-define( TEST, true ).
+-define( DEBUG, true ).
+
+% Set log level
+% ALL=0 < TRACE=1 < DEBUG=2 < INFO=3 < WARN=4 < ERROR=5 < FATAL=6 < OFF=7
+% Level semantics are defined in the org.apache.log4j.Level class.
+-define( LOGLEVEL, 3 ).             % 3 means log info level and above. -- See log/2.
+
+-include_lib("eunit/include/eunit.hrl").
+
+-ifdef( DEBUG ).
+-compile( export_all ).
+-endif.
+
+-define( EVENT_MANAGER, { global, ?MODULE } ).
+
+-include( "records.hrl" ).
+
+-record( state, {} ).
+
+% ---------------------------------------------------------------------------------------
+%% Exported Functions
+% ---------------------------------------------------------------------------------------
+-export([ start_link/1
+				, start_stand_alone_messenger/0
+				, start_supervised_messenger/0
+				, subscribe/2
+				, terminate/2
+			  ]).
+
+
+% ---------------------------------------------------------------------------------------
+%% API Functions
+% ---------------------------------------------------------------------------------------
+
+% Start a stand-alone event manager (me).
+start_stand_alone_messenger() ->
+		start_logger(),
+		gen_event:start( ?EVENT_MANAGER ),         % Choose global / local instance
+		
+		% Message_logger subscribes to all events.
+		Logger = {global, messenger_logger},
+		%Arguments = #subscriber_attributes{ module = messenger_logger, topic = all },
+		%add_stand_alone_subscriber_proxy( Handler, Arguments ).
+		subscribe( Logger, all ).
+
+% Start a supervised event manager (me) -- should be called by a supervisor.
+start_link(Args) ->
+		?debugVal( Args ),
+		start_supervised_messenger().
+
+start_supervised_messenger() ->
+		gen_event:start_link( ?EVENT_MANAGER ).    % Choose global / local instance
+
+init( Args ) ->
+		?debugVal( Args ),
+		{ok, #state{}}.
+
+start_logger() ->
+		messenger_logger:start().
+
+% Is an instance of me running as an event manager?
+is_running() ->
+		% which_handlers(EventMgrRef) -> [Handler]
+		Result_which_handlers = gen_event:which_handlers( ?EVENT_MANAGER ),
+		?debugVal( Result_which_handlers ),
+		[{subscriber_proxy,{{global,messenger_logger},all}}] == Result_which_handlers.
+
+subscribe( Subscriber, Topic ) ->
+		Handler = { subscriber_proxy, { Subscriber, Topic } },
+		Arguments = #subscriber_attributes{ module = Subscriber, topic = Topic },
+		Result = add_stand_alone_subscriber_proxy( Handler, Arguments ),
+		%?debugVal( {start, Result } ),
+		Result.
+
+publish( Notice, OnTopic, FromActorPID ) ->
+		Notice_ID = now(),
+		Event = #event{ notice = Notice, topic = OnTopic, from = FromActorPID, notice_ID = Notice_ID },
+		send_event_to_all_handlers( Event ),
+		Notice_ID.
+
+unsubscribe( Subscriber, ToTopic ) ->
+		%?debugVal( { unsubscribe, Subscriber, ToTopic } ),
+		Handler = { subscriber_proxy, { Subscriber, ToTopic } },
+		UnsubscribeResult = remove_subscriber_proxy( Handler ),
+		%?debugVal( UnsubscribeResult ),
+		UnsubscribeResult.
+		
+terminate( Arg, State ) ->
+		?debugVal( { terminate, Arg, State } ),
+		ok.
+
+% ---------------------------------------------------------------------------------------
+%% Local Functions
+% ---------------------------------------------------------------------------------------
+
+% Start a stand-alone event handler in the context of an event manager instance (me).
+% This event-handler's existence will be independent of the caller's.
+% Handler = Module | { Module, Id }
+% Arguments = (Whatever the handler init/1 needs)
+add_stand_alone_subscriber_proxy( Handler, Arguments ) ->
+		Result = gen_event:add_handler( ?EVENT_MANAGER, Handler, Arguments ),
+	  %?debugVal( Result ),
+	  Result.
+
+% Start a supervised event handler in the context of an event manager instance (me).
+% This event-handler will terminate when the caller terminates.
+add_supervised_subscriber_proxy( Handler, Arguments ) ->
+		Result = gen_event:add_sup_handler( ?EVENT_MANAGER, Handler, Arguments ),
+		%?debugVal( Result ),
+	  Result.
+
+% Remove an event handler
+remove_subscriber_proxy( Handler ) ->
+		?debugVal( { remove_subscriber_proxy, Handler } ),
+		TerminateArguments = 'Someone called event_mgr:remove_subscriber_proxy ',
+		Result = gen_event:delete_handler( ?EVENT_MANAGER, Handler, TerminateArguments ),
+		?debugVal( Result ),
+		Result.
+
+% Send event to all event handlers.  ( asynchronous - does not wait )
+send_event_to_all_handlers( Event ) ->
+		NumberedEvent = Event#event{ notice_ID = now() },        % Update the notice_ID
+		gen_event:notify( ?EVENT_MANAGER, NumberedEvent ).       % Will return  ok  regardless.
+
+% Send event to all event handlers and wait until it is processed by all of them.
+send_event_to_all_handlers_and_wait( Event ) ->
+		NumberedEvent = Event#event{ notice_ID = now() },
+		gen_event:sync_notify( ?EVENT_MANAGER, NumberedEvent).  % Will return  ok  regardless.
+
+stop() ->
+		gen_event:stop( ?EVENT_MANAGER ).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  TESTS  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+start_supervised_messenger_test() ->
+		Result = start_supervised_messenger(),
+		{ok, PID } = Result,
+		?assert( is_pid( PID ) ),
+		gen_event:stop( PID ).        % Stop so that  start_stand_alone_messenger_test  can run.
+
+start_stand_alone_messenger_test() ->
+		Result = start_stand_alone_messenger(),
+		{ok, PID } = Result,
+		?assert( is_pid( PID ) ).
+
+add_stand_alone_subscriber_proxy_test() ->
+		Handler = { subscriber_proxy, instance_1 },
+		Arguments = [ instance_1_arguments ],
+		Result = add_stand_alone_subscriber_proxy( Handler, Arguments ),
+		?assertEqual( ok, Result ).
+
+add_supervised_subscriber_proxy_test() ->
+		Handler = { subscriber_proxy, instance_2 },
+		Arguments = [ instance_2_arguments ],
+		Result = add_supervised_subscriber_proxy( Handler, Arguments ),
+		?assertEqual( ok, Result ).
+
+send_event_to_all_handlers_test() ->
+		Event = #event{ notice ='This is only a test ', topic = send_event_to_all_handlers_test, from = self() },
+		Result = send_event_to_all_handlers( Event ),
+		?assertEqual( ok, Result ).
+
+send_event_to_all_handlers_and_wait_test() ->
+		Event = #event{ notice ='This too is only a test ', topic = send_event_to_all_handlers_and_wait_test, from = self() },
+		Result = send_event_to_all_handlers_and_wait( Event ),
+		?assertEqual( ok, Result ).
+
+remove_subscriber_proxy_test() ->
+		Handler = { subscriber_proxy, instance_1 },
+		Result = remove_subscriber_proxy( Handler ),
+		?assertEqual( ok, Result ).
+		
+stop_test() ->
+		% Test termination behavior --- Will kill event-manager too !!!
+		stop().
+
+
+

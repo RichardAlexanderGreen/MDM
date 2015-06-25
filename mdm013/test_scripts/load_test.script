@@ -1,0 +1,26 @@
+'% ------------------------- START SCRIPT --------------------'.
+
+'actors:init_world()'.
+ actors:init_world().
+
+'meters:initialize_table()'.
+ meters:initialize_table().
+
+
+'actors:test()'.
+ actors:test().
+
+'node:test()'.
+ node:test().
+
+'node:tick_load_test( 10 )  10 stations ==> 1,000,000 services'. 
+ node:tick_load_test( 10 ).
+
+'ets:info( world )'.
+ ets:info( world ).
+
+'ets:info( meters )'.
+ ets:info( meters ).
+
+'% ------------------------- END SCRIPT --------------------'.
+

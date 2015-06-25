@@ -1,0 +1,19 @@
+'% ----------------------- START SCRIPT -----------------'.
+
+'meter:test()'.
+ meter:test().
+
+'service:test()'.
+ service:test().
+
+'transformer:test()'.
+ transformer:test().
+
+'circuit:test()'.
+ circuit:test().
+
+'station:test()'.
+ station:test().
+
+
+'% ----------------------- END SCRIPT -----------------'.

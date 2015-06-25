@@ -1,0 +1,5 @@
+'======================== START OF SCRIPT ==================='.
+'messenger_logger:test()'.
+ messenger_logger:test().
+
+'======================== END OF SCRIPT ==================='.

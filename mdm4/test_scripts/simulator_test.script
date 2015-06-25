@@ -1,0 +1,25 @@
+'================== START SCRIPT ================='.
+'================ START OF TEST ==================='.
+'gen_server:start({global, assets}, assets, [], [{debug,[trace]}] )'.
+ gen_server:start({global, assets}, assets, [], [] ).
+
+'gen_server:start({global, services}, services, [], [{debug,[trace]}] )'.
+ gen_server:start({global, services}, services, [], [ ] ).
+
+'gen_server:start({global, transformers}, transformers, [], [{debug,[trace]}] )'.
+ gen_server:start({global, transformers}, transformers, [], [ ] ).
+
+'gen_server:start({global, circuits}, circuits, [], [{debug,[trace]}] )'.
+ gen_server:start({global, circuits}, circuits, [], [ ] ).
+
+'global:registered_names()'.
+ global:registered_names().
+
+
+'simulator:test()'.
+ simulator:test().
+
+
+'q()'.
+ q().
+'================== END SCRIPT ================='.

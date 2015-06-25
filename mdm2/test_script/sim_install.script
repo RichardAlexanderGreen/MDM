@@ -1,0 +1,19 @@
+' ================================= START OF SCRIPT ==================================='.
+
+'net_adm:ping( messengerNode@RichardGreenMacBookPro.local )'.
+ net_adm:ping( messengerNode@RichardGreenMacBookPro.local ).
+
+'timer:sleep( 4000 )'.
+ timer:sleep( 4000 ).
+
+'global:registered_names()'.
+ global:registered_names().
+
+'messenger:is_running()'.
+ messenger:is_running().
+
+'sim_install:test()'.
+ sim_install:test().
+
+' ================================= END OF SCRIPT ==================================='.
+

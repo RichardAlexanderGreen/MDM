@@ -1,0 +1,35 @@
+'================ START OF TEST ==================='.
+'node()'.
+ node().
+
+ mnesia:create_schema( [node()] ).
+ mnesia:create_schema( [node()] ).
+
+'mnesia:start()'.
+ mnesia:start().
+
+'gen_server:start({global, assets}, assets, [], [{debug,[trace]}] )'.
+ gen_server:start({global, assets}, assets, [], [] ).
+
+'global:registered_names()'.
+ global:registered_names().
+
+'mnesia:clear_table( object )'.
+ mnesia:clear_table( object ).
+
+'assets:test()'.
+ assets:test().
+
+'mnesia:info()'.
+ mnesia:info().
+
+'mnesia:dump_to_textfile( "mnesia_dump.txt" )'.
+ mnesia:dump_to_textfile( "mnesia_dump.txt" ).
+
+'mnesia:stop()'.
+ mnesia:stop().
+
+'q()'.
+ q().
+
+'================ END OF TEST ==================='.

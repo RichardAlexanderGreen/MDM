@@ -1,0 +1,27 @@
+'================ START OF TEST ==================='.
+
+'gen_server:start({global, assets}, assets, [], [{debug,[trace]}] )'.
+ gen_server:start({global, assets}, assets, [], [ ] ).
+
+'gen_server:start({global, services}, services, [], [{debug,[trace]}] )'.
+ gen_server:start({global, services}, services, [], [ ] ).
+
+'global:registered_names()'.
+ global:registered_names().
+
+'meters:test()'.
+ meters:test().
+
+'ets:tab2list( service_usage )'.
+ ets:tab2list( service_usage ).
+
+'ets:tab2file( assets, "assets_table" )'.
+ ets:tab2file( assets, "assets_table" ).
+
+'ets:tab2file( service_usage, "service_usage_table" )'.
+ ets:tab2file( service_usage, "service_usage_table" ).
+
+'q()'.
+ q().
+
+'================ END OF TEST ==================='.

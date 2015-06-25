@@ -1,0 +1,6 @@
+'================== START SCRIPT ================='.
+
+'load_profile:test()'.
+ load_profile:test().
+
+'================== END SCRIPT ================='.

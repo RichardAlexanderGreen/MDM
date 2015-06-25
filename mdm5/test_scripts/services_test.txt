@@ -1,0 +1,27 @@
+'================ START OF SCRIPT ==================='.
+
+'mnesia:start()'.
+ mnesia:start().
+
+'gen_server:start({global, assets}, assets, [], [{debug,[trace]}] )'.
+ gen_server:start({global, assets}, assets, [], [ ] ).
+
+'gen_server:start({global, services}, services, [], [{debug,[trace]}] )'.
+ gen_server:start({global, services}, services, [], [ ] ).
+
+'global:registered_names()'.
+ global:registered_names().
+
+'meters:test()'.
+ meters:test().
+ 
+'mnesia:info()'.
+ mnesia:info().
+
+'mnesia:stop()'.
+ mnesia:stop().
+
+'q()'.
+ q().
+
+'================ END OF TEST ==================='.

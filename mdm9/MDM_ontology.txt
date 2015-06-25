@@ -1,0 +1,27 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+---
+Comments:
+. This MDM case study simulates a network of services, meters, and recorders.
+. Each service is monitored by a meter.
+. In simulation mode, each service will generate usage events.
+. Each meter records the service usage and environmental events that it detects.
+. Each meter may forward usage history when requested by the recorder (via the network).
+. Consider modifying the notation to include a When: clause under a role.
+---
+Sensor: Service.
+
+When: Clock sends current-date-time C and prior-date-time P.
+. From my profile calculate randomized consumption giving "Service S used energy E over period P.".
+. Send my meter: "Service S used energy E over period P."
+---
+Sensor: Meter.
+
+When: Service S used energy E over period P. 
+. WorldBase: Entity {Service S, Period P} attribute {energy-used} value E.   ( <<< Big Table ? )
+
+When: Please send usage history of period P.
+. Publish: Meter M reports service S usage U for period P.          ( <<< Subscribers -- Look for matching When ???)
+--- 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+--- 
+

@@ -1,0 +1,48 @@
+'================== START SCRIPT ================='.
+
+'mnesia:start()'.
+ mnesia:start().
+
+'gen_server:start({global, assets}, assets, [], [{debug,[trace]}] )'.
+ gen_server:start({global, assets}, assets, [], [] ).
+
+'gen_server:start({global, services}, services, [], [{debug,[trace]}] )'.
+ gen_server:start({global, services}, services, [], [ ] ).
+
+'gen_server:start({global, transformers}, transformers, [], [{debug,[trace]}] )'.
+ gen_server:start({global, transformers}, transformers, [], [ ] ).
+
+'gen_server:start({global, circuits}, circuits, [], [{debug,[trace]}] )'.
+ gen_server:start({global, circuits}, circuits, [], [ ] ).
+
+'mnesia:info()'.
+ mnesia:info().
+
+'global:registered_names()'.
+ global:registered_names().
+
+'simulator:month_load_tester()'.
+ simulator:month_load_tester().
+
+'mnesia:info()'.
+ mnesia:info().
+
+'timer:sleep( 60 * 1000 )'.
+ timer:sleep( 60 * 1000 ).
+
+'mnesia:info()'.
+ mnesia:info().
+
+'timer:sleep( 60 * 1000 )'.
+ timer:sleep( 60 * 1000 ).
+
+'mnesia:info()'.
+ mnesia:info().
+
+
+'mnesia:stop()'.
+ mnesia:stop().
+
+'q()'.
+ q().
+'================== END SCRIPT ================='.
